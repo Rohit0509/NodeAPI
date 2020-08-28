@@ -12,7 +12,8 @@ pipeline {
       steps {
         sh 'echo "sonar qube scanning"'
         script {
-           sh 'echo "ss"'
+           def scannerHome = tool 'sonarScanner';
+           
         }
       }
     }
