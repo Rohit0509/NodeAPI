@@ -7,14 +7,13 @@ pipeline {
         sh 'npm build'
       }
     }
-    /*
     stage('Sonarqube'){
       steps {
         sh 'echo "sonar qube scanning"'
          script {
           withSonarQubeEnv('sonar-1') { 
               sh 'echo "here ===>>>>> "'
-              sh "${tool('sonarScanner')}/bin/sonar-scanner \
+              sh "${tool('SonarQube Scanner 4.4')}/bin/sonar-scanner \
               -Dsonar.projectKey=test-node-js \
               -Dsonar.sources=. \
               -Dsonar.css.node=. \
@@ -25,20 +24,20 @@ pipeline {
         }
       }
     }
-    */
-
-    stage('Sonarqube') {
-      steps {
-          sh 'echo "here ==>>> "'
-          withSonarQubeEnv('sonar-1') {
-            sh 'echo "===>>>> INSIDE ===>>>> "'
-            sh "${tool('SonarQube Scanner 4.4')}/bin/sonar-scanner"
-          }
-          timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-          }
-      }
-    }
+    
+    // stage('Sonarqube') {
+    //   steps {
+    //       sh 'echo "here ==>>> "'
+    //       withSonarQubeEnv('sonar-1') {
+    //         sh 'echo "===>>>> INSIDE ===>>>> "'
+    //         sh "${tool('SonarQube Scanner 4.4')}/bin/sonar-scanner"
+    //       }
+    //       timeout(time: 10, unit: 'MINUTES') {
+    //         waitForQualityGate abortPipeline: true
+    //       }
+    //   }
+    // }
+    
     stage('Test') {
       steps {
          sh 'npm test'
