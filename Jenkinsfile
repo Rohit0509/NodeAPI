@@ -32,7 +32,7 @@ pipeline {
           sh 'echo "here ==>>> "'
           withSonarQubeEnv('sonar-1') {
             sh 'echo "===>>>> INSIDE ===>>>> "'
-            sh "${tool('SonarQubeScanner')}/bin/sonar-scanner"
+            sh "${tool('SonarQube Scanner 4.4')}/bin/sonar-scanner"
           }
           timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
