@@ -11,10 +11,9 @@ pipeline {
       steps {
         sh 'echo "sonar qube scanning"'
          script {
-           def scannerHome = tool 'sonarScanner';
-		      withSonarQubeEnv('sonar-1') { 
+          withSonarQubeEnv('sonar-1') { 
               sh 'echo "here ===>>>>> "'
-              sh "${tool("sonarqube")}/bin/sonar-scanner \
+              sh "${tool('sonarScanner')}/bin/sonar-scanner \
               -Dsonar.projectKey=test-node-js \
               -Dsonar.sources=. \
               -Dsonar.css.node=. \
