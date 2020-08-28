@@ -12,10 +12,15 @@ pipeline {
       steps {
         sh 'echo "sonar qube scanning"'
         script {
-          withSonarQubeEnv('sonar-1') {
-            def scannerHome = tool 'sonarScanner';
-            sh "${scannerHome}/bin/sonar-scanner"
-          }
+            def scannerHome = tool 'sonarqube';
+           withSonarQubeEnv("sonar-1") {
+               sh "${tool("sonarqube")}/bin/sonar-scanner \
+               -Dsonar.projectKey=test-node-js \
+               -Dsonar.sources=. \
+               -Dsonar.css.node=. \
+               -Dsonar.host.url=http://15.207.83.196:9000 \
+               -Dsonar.login=9a3bac7bdf21ef068e37131712fcdd36085bb471"
+             }
         }
       }
     }
